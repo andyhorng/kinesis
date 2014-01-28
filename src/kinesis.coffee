@@ -47,10 +47,10 @@ exports.listen = (StreamName, opts={}) ->
                 .each(sink)
 
                 if result.Records.length > 0
-                  iterateShard ShardIterator
+                  iterateShard result.NextShardIterator
                 else
                   # throttle
-                  setTimeout _.partial(iterateShard, ShardIterator), 200
+                  setTimeout _.partial(iterateShard, result.NextShardIterator), 200
 
             iterateShard d.ShardIterator
         return ->

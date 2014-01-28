@@ -7,9 +7,13 @@ debug   = require 'debug'
 
 print = debug 'creek:kinesis'
 
-kinesis = new AWS.Kinesis()
 
-exports.listen = (StreamName) ->
+exports.listen = (StreamName, opts={}) ->
+  _.defaults opts, {
+    region: 'us-east-1'
+  }
+  kinesis = new AWS.Kinesis(opts)
+
   Bacon
     .fromNodeCallback(kinesis, 'describeStream', {StreamName})
     .flatMap ({StreamDescription: {Shards}}) ->
@@ -34,7 +38,12 @@ exports.listen = (StreamName) ->
                 _.chain(result.Records)
                 .pluck('Data')
                 .map (d) ->
-                  new Buffer(d, 'base64').toString()
+                  buf = new Buffer(d, 'base64').toString()
+                  try
+                    return JSON.parse buf
+                  catch e
+                    print 'bad json'
+                    return new Bacon.Error(e.message)
                 .each(sink)
 
                 if result.Records.length > 0
@@ -47,7 +56,12 @@ exports.listen = (StreamName) ->
         return ->
           # do-op
 
-exports.publish = (StreamName) ->
+exports.publish = (StreamName, opts={}) ->
+  _.defaults opts, {
+    region: 'us-east-1'
+  }
+  kinesis = new AWS.Kinesis(opts)
+
   bus = new Bacon.Bus()
   bus
     .filter(_.isObject)

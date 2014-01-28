@@ -24,5 +24,10 @@
     "baconjs": "~0.7.2",
     "aws-sdk": "~2.0.0-rc8",
     "debug": "~0.7.4"
+  },
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "mocha": "~1.17.1",
+    "coffee-script": "~1.6.3"
   }
 }

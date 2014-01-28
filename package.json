@@ -1,0 +1,28 @@
+{
+  "name": "kinesis",
+  "version": "0.0.0",
+  "description": "Kinesis + Bacon.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andyhorng/kinesis.git"
+  },
+  "keywords": [
+    "kinesis",
+    "bacon",
+    "reactive"
+  ],
+  "author": "andyhorng",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "728834637b1dbc5a06bde3a2059b19f314234f74",
+  "dependencies": {
+    "underscore": "~1.5.2",
+    "baconjs": "~0.7.2",
+    "aws-sdk": "~2.0.0-rc8",
+    "debug": "~0.7.4"
+  }
+}

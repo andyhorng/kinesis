@@ -1,5 +1,5 @@
 {
-  "name": "kinesis",
+  "name": "kinesis.js",
   "version": "0.0.1",
   "description": "Kinesis + Bacon.js",
   "main": "index.js",

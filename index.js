@@ -60,9 +60,9 @@
                   }
                 }).each(sink);
                 if (result.Records.length > 0) {
-                  return iterateShard(ShardIterator);
+                  return iterateShard(result.NextShardIterator);
                 } else {
-                  return setTimeout(_.partial(iterateShard, ShardIterator), 200);
+                  return setTimeout(_.partial(iterateShard, result.NextShardIterator), 200);
                 }
               });
             };
